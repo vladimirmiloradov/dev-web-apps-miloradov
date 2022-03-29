@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Об авторе</h1>
+<div class="row">
+    <div class="col-md-4">
+        <img src="{{ url_for('static' , filename='images/avatar.jpg')}}" alt="">
+    </div>
+    <div class="col-md-8">
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti nobis modi consectetur sint nesciunt sit,
+            commodi debitis temporibus velit iste id minus. Deserunt quaerat maiores blanditiis alias accusantium est
+            voluptate!
+        </p>
+    </div>
+</div>
+{% endblock %}
