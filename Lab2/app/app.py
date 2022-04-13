@@ -46,8 +46,9 @@ def phone():
             else:
                 check = False
                 err_msg_symbols = 'Недопустимый ввод. В номере телефона встречаются недопустимые символы.'
-        if count == 11 and (request.form.get('telephone').startswith('8') and request.form.get('telephone').startswith('+7')) and check:
-            pass        
+        if count == 11 and not(request.form.get('telephone').startswith('8') or request.form.get('telephone').startswith('+7')):
+            check = False
+            err_msg_volume = 'Недопустимый ввод. Начало не с той цифры или знака.'        
         elif count == 10 and not(request.form.get('telephone').startswith('8') and request.form.get('telephone').startswith('+7')) and check:
             result = '8' + result
         elif count != 11 and count != 10:
