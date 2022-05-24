@@ -1,0 +1,6 @@
+SECRET_KEY = '72f5a72a25d8d5f5a10a9fd21eeec4b2cb347e839c82b061e4ff5e6ad5011b88'
+MYSQL_USER = 'std_1539_lab4'
+MYSQL_DATABASE = 'std_1539_lab4'
+MYSQL_HOST = 'std-mysql.ist.mospolytech.ru'
+MYSQL_PASSWORD = '1234567890'
+ADMIN_ROLE_ID = 2
