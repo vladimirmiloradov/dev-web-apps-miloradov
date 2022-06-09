@@ -19,7 +19,7 @@
     </div>
 {% endmacro %}
 
-{% macro render_user_review(comment, current_user) %}
+{% macro render_user_review(user_review, current_user) %}
     <h2 class="text-center text-uppercase font-weight-bold">Ваш отзыв</h2>
     <div class="container d-flex w-50 justify-content-center flex-column">
         <div class="my-3"></div>
@@ -29,30 +29,30 @@
             </div>
             <div class="flex-grow-1 text-start ms-3">                
                 <h5>{{ current_user.last_name }} {{ current_user.first_name }}</h5>
-                <p class="mb-0">{{ comment.text | truncate(100)}}</p>
+                <p class="mb-1">{{ user_review.text | truncate(100)}}</p>
+                <p class="mb-1">Оценка: {{ user_review.rating }}</p>
+                <h6>{{ user_review.created_at }}</h6>
             </div>
         </div>
     </div>
 {% endmacro %}
 
-{% macro render_five_last_reviews(review, current_user, users) %}
+{% macro render_five_last_reviews(reviews) %}
     <div class="container d-flex w-50 justify-content-center flex-column">
         <div class="my-3">
-        {% for comment in review %}
-            <div class="d-flex my-3">
-                <div class="flex-shrink-0">
-                    <img src="{{ url_for('static', filename='images/default-profile-picture-300x300.jpeg') }}" class="rounded-circle comment-img" style="max-width: 50px;" alt="img-comment">
+            {% for review in reviews %}
+                <div class="d-flex mt-4">
+                    <div class="flex-shrink-0">
+                        <img src="{{ url_for('static', filename='images/default-profile-picture-300x300.jpeg') }}" class="rounded-circle comment-img" style="max-width: 50px;" alt="img-comment">
+                    </div>
+                    <div class="flex-grow-1 text-start ms-3">
+                        <h5>{{ review.user.last_name }} {{ review.user.first_name }}</h5>
+                        <p class="mb-0">{{ review.text | truncate(100)}}</p>
+                        <h6>Оценка: {{ review.rating }}</h6>
+                        <h6>{{ review.created_at }}</h6>
+                    </div>
                 </div>
-                <div class="flex-grow-1 text-start ms-3">
-                    {% for user in users %}
-                        {% if user.id == comment.user_id %}
-                            <h5>{{ user.last_name }} {{ user.first_name }}</h5>
-                            <p class="mb-0">{{ comment.text | truncate(100)}}</p>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
         </div>
     </div> 
 {% endmacro %}
