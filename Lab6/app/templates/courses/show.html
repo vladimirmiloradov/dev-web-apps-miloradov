@@ -65,23 +65,21 @@
     </section>
 
     {% if current_user.is_authenticated %}
-    <h2 class="my-3 text-center text-uppercase font-weight-bold">Оставить отзыв</h2>
-    <div class="text-center">
-            {{ render_form(course, current_user) }}
-    </div>
+        {% if user_review %}
+            <div class="text-center">
+                {{ render_user_review(user_review, current_user) }}
+            </div>
+        {% else %}
+            <h2 class="my-3 text-center text-uppercase font-weight-bold">Оставить отзыв</h2>
+            <div class="my-3">
+                {{ render_form(course, current_user) }}            
+            </div>
+        {% endif %}
     {% endif %}
-
-    {% for comment in review %}
-    {% if current_user.id == comment.user_id %}
-        <div class="my-3">
-            {{ render_user_review(comment, current_user) }}
-        </div>
-    {% endif %}
-    {% endfor %}
 
 
     <h2 class="my-3 text-center text-uppercase font-weight-bold">Недавние отзывы</h2>
-    {{ render_five_last_reviews(review, current_user, users) }}
+    {{ render_five_last_reviews(review) }}
 
     <div class="d-flex justify-content-center">
         <a href="{{ url_for('courses.reviews', course_id=course.id) }}" class="mb-5 text-center btn btn-dark">Все отзывы</a>
