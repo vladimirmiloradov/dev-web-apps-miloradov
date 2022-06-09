@@ -1,4 +1,4 @@
-from models import Course, Image
+from models import Course, Image, Review
 import hashlib
 import uuid
 import os
@@ -23,6 +23,22 @@ class CoursesFilter:
     def __filter_by_category_ids(self):
         if self.category_ids:
             self.query = self.query.filter(Course.category_id.in_(self.category_ids))
+
+class ReviewsFilter:
+    def __init__(self, course_id):
+        self.query = Review.query.filter_by(course_id=course_id)
+
+    def perform_date_desc(self):
+        return self.query.order_by(Review.created_at.desc())
+
+    def perform_date_asc(self):
+        return self.query.order_by(Review.created_at.asc())
+
+    def perform_rating_desc(self):
+        return self.query.order_by(Review.rating.desc())
+
+    def perform_rating_asc(self):
+        return self.query.order_by(Review.rating.asc())
 
 class ImageSaver:
     def __init__(self, file):
